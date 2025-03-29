@@ -1,0 +1,28 @@
+name: Run Python Code on Windows
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  run-python:
+    runs-on: windows-latest  # Uses Windows OS
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4  # Fetches your code
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'  # You can change this to match your Python version
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas matplotlib seaborn scikit-learn wordcloud  # Install required packages
+
+    - name: Run Python Script
+      run: python code1.py  # Execute your Python script
